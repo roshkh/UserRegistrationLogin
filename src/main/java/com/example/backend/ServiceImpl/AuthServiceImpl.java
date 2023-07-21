@@ -1,6 +1,7 @@
 package com.example.backend.ServiceImpl;
 
 import com.example.backend.Entity.User;
+import com.example.backend.Exception.ResourceNotFoundException;
 import com.example.backend.Repository.UserRepository;
 import com.example.backend.Request.AuthRequest;
 import com.example.backend.Service.AuthService;
@@ -28,9 +29,8 @@ private UserRepository userRepository;
            else {
                return "Password didnt match";
            }
-
        }catch (Exception e){
-           return "User Not Found";
+          throw new ResourceNotFoundException(authRequest.getUsername()+" not found");
        }
     }
 }
